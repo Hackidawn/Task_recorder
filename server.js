@@ -9,12 +9,16 @@ const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 
-// ✅ Fixed CORS setup
-app.use(cors({
+// ✅ CORS must be declared before routes
+const corsOptions = {
   origin: ['http://localhost:3000', 'https://task-tracker-frontend.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
