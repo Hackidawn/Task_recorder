@@ -9,7 +9,13 @@ const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 
-app.use(cors());
+// ✅ Fixed CORS setup
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://task-tracker-frontend.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
